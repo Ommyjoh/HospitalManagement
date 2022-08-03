@@ -55,7 +55,7 @@ class ListUsers extends Component
 
 
 
-    public function showConfirmation($userId){
+    public function showConfirmation($userId){ 
         $this->deletedUser = $userId;
         $this->dispatchBrowserEvent('show-delete-confirmation');
     }
