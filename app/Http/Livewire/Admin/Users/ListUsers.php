@@ -53,8 +53,6 @@ class ListUsers extends Component
         $this->dispatchBrowserEvent('hideForm', ['message' => 'User updated successfull😃']);
     }
 
-
-
     public function showConfirmation($userId){ 
         $this->deletedUser = $userId;
         $this->dispatchBrowserEvent('show-delete-confirmation');
