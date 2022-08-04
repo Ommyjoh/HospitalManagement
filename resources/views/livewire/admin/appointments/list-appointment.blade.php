@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-end mb-2">
-                    <button class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New Appointment</button>
+                    <a href="{{ route('admin.appointments.create') }}"><button class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New Appointment</button></a>
                 </div>
             <div class="card">
                 <div class="card-body">
@@ -34,6 +34,7 @@
                             <th scope="col">Client name</th>
                             <th scope="col">Date</th>
                             <th scope="col">time</th>
+                            <th scope="col">status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
@@ -43,6 +44,7 @@
                             <td>Emmanuel</td>
                             <td>12/07/2012</td>
                             <td>00:12:34</td>
+                            <td>Pending</td>
                             <td>
                                 <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
                                 <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
