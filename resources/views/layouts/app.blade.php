@@ -16,6 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset ('backend/dist/css/adminlte.min.css')}}">
   <link rel="stylesheet" href="{{  asset ('backend/plugins/toastr/toastr.min.css')}}">
+  <link rel="stylesheet" href="{{  asset ('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   @livewireStyles
 </head>
 
@@ -60,6 +61,8 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js')}}"></script>
 <script src="{{  asset ('backend/plugins/toastr/toastr.min.js')}}"></script>
+<script src="https://unpkg.com/moment"></script>
+<script src="{{  asset ('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 
 <script>
   $(document).ready(function(){
@@ -90,6 +93,14 @@
     $('#deleteConfirmation').modal('hide');
     toastr.error(event.detail.message, 'Success ☑️')
   })
+</script>
+
+<script>
+  $(document).ready(function() {
+    $('#appointmentDate').datetimepicker({
+      format: 'L',
+    });
+  });
 </script>
 
 @livewireScripts

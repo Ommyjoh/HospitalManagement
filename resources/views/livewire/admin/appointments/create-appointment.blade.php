@@ -29,19 +29,19 @@
                                     <div class="row col-lg-6">
                                         <label for="Name">Name</label>
                                         <select class="form-select" aria-label="Default select example">
-                                            <option selected>Select Name...</option>
-                                            <option value="1">Emmanuel Boshe</option>
-                                            <option value="2">Sajjad Tuli</option>
-                                            <option value="3">Peter Gerald</option>
+                                                    <option selected>Select Name...</option>
+                                             @foreach ($clients as $client)
+                                                    <option value="{{ $client->id}}">{{ $client->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
                                     <div class="d-flex mt-2">
                                         <div class="row col-lg-6">
                                             <label for="date">Date</label>
-                                                <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
-                                                    <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                                                <div class="input-group date" id="appointmentDate" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#appointmentDate"/>
+                                                    <div class="input-group-append" data-target="#appointmentDate" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                                     </div>
                                                 </div>
@@ -49,9 +49,9 @@
 
                                         <div class="row col-lg-6">
                                             <label for="date">Time</label>
-                                                <div class="input-group date" id="datetimepicker3" data-target-input="nearest">
-                                                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker3"/>
-                                                    <div class="input-group-append" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                                <div class="input-group date" id="appointmentTime" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input" data-target="#appointmentTime"/>
+                                                    <div class="input-group-append" data-target="#appointmentTime" data-toggle="datetimepicker">
                                                         <div class="input-group-text"><i class="fa fa-clock"></i></div>
                                                     </div>
                                                 </div>
@@ -59,13 +59,13 @@
                                     </div>
 
                                     <div class="row col-lg-12 mt-2">
-                                        <label for="Name">Name</label>
+                                        <label for="Name">Note</label>
                                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
                                     </div>
 
                                     <div class="mt-4">
-                                        <button type="button" class="btn btn-secondary mr-2" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary">Save appointment</button>
+                                        <button type="button" class="btn btn-secondary mr-2" data-bs-dismiss="modal"><i class="fa fa-times mr-1"></i>Cancel</button>
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-save mr-1"></i>Save appointment</button>
                                       </div>
                                 </div>
                             </div>
