@@ -20,7 +20,7 @@ class CreateAppointment extends Component
             'date' => 'required',
             'time' => 'required',
             'note' => 'nullable',
-            'status' => 'required',
+            'status' => 'required|in:SCHEDULED,CLOSED',
         ], [
             'client_id.required' => 'Please select client before proceeding',
             'status.required' => 'Please select status before proceeding'
