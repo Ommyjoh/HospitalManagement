@@ -93,6 +93,10 @@
     $('#deleteConfirmation').modal('hide');
     toastr.error(event.detail.message, 'Success ☑️')
   })
+
+  window.addEventListener('success', event =>{
+    toastr.success(event.detail.message, 'Success ☑️')
+  })
 </script>
 
 @stack('js')

@@ -27,7 +27,8 @@ class CreateAppointment extends Component
         ])->validate();
 
         Appointment::create($this->state);
-        $this->dispatchBrowserEvent('alert', ['message' => 'Appointment created successfully!']);
+        $this->dispatchBrowserEvent('success', ['message' => 'Appointment created successfully!']);
+        return redirect('admin/appointments');
     }
 
     public function render()

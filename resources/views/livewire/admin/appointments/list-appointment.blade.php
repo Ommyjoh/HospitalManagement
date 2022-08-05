@@ -62,6 +62,9 @@
                     </table>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
+                    {{  $appointments->links() }}
+                </div>
+                <div class="card-footer d-flex justify-content-end">
                 </div>
             </div>
             </div>
