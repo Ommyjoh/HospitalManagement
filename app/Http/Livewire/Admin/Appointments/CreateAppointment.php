@@ -28,7 +28,7 @@ class CreateAppointment extends Component
 
         Appointment::create($this->state);
         $this->dispatchBrowserEvent('success', ['message' => 'Appointment created successfully!']);
-        return redirect('admin/appointments');
+        $this->state = [];
     }
 
     public function render()
