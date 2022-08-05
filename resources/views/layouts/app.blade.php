@@ -95,13 +95,7 @@
   })
 </script>
 
-<script>
-  $(document).ready(function() {
-    $('#appointmentDate').datetimepicker({
-      format: 'L',
-    });
-  });
-</script>
+@stack('dateJs')
 
 @livewireScripts
 </body>
