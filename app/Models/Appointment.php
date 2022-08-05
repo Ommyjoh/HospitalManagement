@@ -15,4 +15,8 @@ class Appointment extends Model
         'date' => 'datetime',
         'time' => 'datetime',
     ];
+
+    public function client(){
+        return $this->belongsTo('App\Models\Client');
+    }
 }

@@ -28,12 +28,13 @@
             </div>
           <div class="card">
             <div class="card-body">
-                <table class="table">
+                <table class="table table-striped">
                     <thead>                         
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Name</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Created At</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -42,7 +43,8 @@
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
+                        <td>{{$user->email}}</td>
+                        <td>{{$user->created_at->format('d-m-Y')}}</td>
                         <td>
                             <a href="#" wire:click.prevent = "editUserForm({{ $user }})"> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
                             <a href="#" wire:click.prevent = "showConfirmation({{ $user->id }})"> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>

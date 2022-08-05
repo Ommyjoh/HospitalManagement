@@ -95,7 +95,7 @@
   })
 </script>
 
-@stack('dateJs')
+@stack('js')
 
 @livewireScripts
 </body>

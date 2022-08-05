@@ -4,15 +4,28 @@ namespace App\Http\Livewire\Admin\Appointments;
 
 use App\Models\Appointment;
 use App\Models\Client;
+use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
 
 class CreateAppointment extends Component
 {
-    public $state = [];
+    public $state = [
+        'status' => 'SCHEDULED'
+    ];
 
     public function addAppointment(){
-        //validation
-        $this->state['status'] = 'Pending';
+
+        Validator::make($this->state, [
+            'client_id' => 'required',
+            'date' => 'required',
+            'time' => 'required',
+            'note' => 'nullable',
+            'status' => 'required',
+        ], [
+            'client_id.required' => 'Please select client before proceeding',
+            'status.required' => 'Please select status before proceeding'
+        ])->validate();
+
         Appointment::create($this->state);
         $this->dispatchBrowserEvent('alert', ['message' => 'Appointment created successfully!']);
     }

@@ -27,30 +27,37 @@
                 </div>
             <div class="card">
                 <div class="card-body">
-                    <table class="table">
+                    <table class="table table-striped">
                         <thead>                         
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Client name</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">time</th>
-                            <th scope="col">status</th>
+                            <th scope="col">Appointment Date</th>
+                            <th scope="col">Appointment Time</th>
+                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Emmanuel</td>
-                            <td>12/07/2012</td>
-                            <td>00:12:34</td>
-                            <td>Pending</td>
-                            <td>
-                                <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
-                                <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
-                            </td>
-                        </tr>
-
+                            @foreach ($appointments as $appointment)
+                            <tr class="">
+                                    <th scope="row">{{ $loop->iteration }}</th>
+                                    <td>{{$appointment->client->name}}</td>
+                                    <td>{{ $appointment->date->format('d-m-Y') }}</td>
+                                    <td>{{ $appointment->time->format('H:i A')}}</td>
+                                    <td>
+                                        @if ($appointment->status == 'SCHEDULED')
+                                            <span class="badge badge-primary">SCHEDULED</span>
+                                        @elseif($appointment->status == 'CLOSED')
+                                            <span class="badge badge-success">CLOSED</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
+                                        <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
+                                    </td>
+                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
