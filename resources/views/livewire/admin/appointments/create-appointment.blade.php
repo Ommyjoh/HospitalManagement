@@ -23,7 +23,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form wire:submit.prevent="addAppointment">
+                        <form autocomplete="off" wire:submit.prevent="addAppointment">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
@@ -42,25 +42,39 @@
                                         @enderror
                                     </div>
 
-                                    <div class="d-flex mt-2">
-                                        <div class="row col-lg-6">
-                                            <label for="date">Appointment Date:</label>
-                                                <div wire:ignore class="input-group date" id="appointmentDate" data-target-input="nearest" data-appointmentdate="@this">
-                                                    <input id="appointmentDateInput" type="text" class="form-control datetimepicker-input" data-target="#appointmentDate"/>
-                                                    <div class="input-group-append" data-target="#appointmentDate" data-toggle="datetimepicker">
-                                                        <div class="input-group-text bg-info bg-gradient"><i class="fa fa-calendar"></i></div>
+                                    <div class="row mt-4">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="appointmentTime">Appointment Date:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-info"><i class="far fa-calendar"></i></span>
+                                                    </div>
+                                                    <x-datepicker wire:model.defer="state.date" id="appointmentDate" :error="'date'"></x-datepicker>
+                                                    <div class="invalid-feedback">
+                                                        @error('date')
+                                                            {{ $message }}
+                                                        @enderror
                                                     </div>
                                                 </div>
+                                            </div>
                                         </div>
 
-                                        <div class="row col-lg-6">
-                                            <label for="date">Appointment Time:</label>
-                                                <div wire:ignore class="input-group date" id="appointmentTime" data-target-input="nearest" data-appointmenttime = "@this">
-                                                    <input id="appointmentTimeInput" type="text" class="form-control datetimepicker-input" data-target="#appointmentTime"/>
-                                                    <div class="input-group-append" data-target="#appointmentTime" data-toggle="datetimepicker">
-                                                        <div class="input-group-text bg-info bg-gradient"><i class="fa fa-clock"></i></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="appointmentTime">Appointment Time:</label>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                    <span class="input-group-text bg-info"><i class="far fa-clock"></i></span>
                                                     </div>
+                                                    <x-timepicker wire:model.defer="state.time"  id="appointmentTime" :error="'time'"></x-timepicker>
+                                                    @error('time')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -87,7 +101,7 @@
 
                                     <div class="mt-4">
                                         <button type="button" class="btn btn-secondary mr-2" data-bs-dismiss="modal"><i class="fa fa-times mr-1"></i><a href="{{ route('admin.appointments') }}" class="text-white">Cancel</a></button>
-                                        <button id="submit" type="submit" class="btn btn-primary"><i class="fa fa-save mr-1"></i>Save appointment</button>
+                                        <button id="submit" type="submit" class="btn btn-primary" value="Hellow"><i class="fa fa-save mr-1"></i>Save Appointment</button>
                                     </div>
                                 </div>
                             </div>
@@ -98,32 +112,6 @@
         </div>
 
     @push('js')
-
-        <script>
-            // script for date picker
-            $(document).ready(function() {
-              $('#appointmentDate').datetimepicker({
-                format: 'L',
-            });
-          
-            $('#appointmentDate').on("change.datetimepicker", function(e) {
-              let date = $(this).data('appointmentdate');
-              eval(date).set('state.date', $('#appointmentDateInput').val());
-            });
-          
-          
-            // script for time picker
-            $('#appointmentTime').datetimepicker({
-                format: 'LT',
-            });
-          
-            $('#appointmentTime').on("change.datetimepicker", function(e) {
-              let time = $(this).data('appointmenttime');
-              eval(time).set('state.time', $('#appointmentTimeInput').val());
-            });
-          
-            });  
-        </script>
 
         <script src="https://cdn.ckeditor.com/ckeditor5/35.0.1/classic/ckeditor.js"></script>
 

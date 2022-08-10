@@ -28,7 +28,7 @@
             </div>
           <div class="card">
             <div class="card-body">
-                <table class="table table-hover">
+                <table class="table table-hover text-center">
                     <thead>                         
                       <tr>
                         <th scope="col">No</th>

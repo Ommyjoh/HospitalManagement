@@ -27,13 +27,14 @@
                 </div>
             <div class="card">
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <table class="table table-hover text-center">
                         <thead>                         
                         <tr>
                             <th scope="col">No</th>
                             <th scope="col">Client name</th>
                             <th scope="col">Appointment Date</th>
                             <th scope="col">Appointment Time</th>
+                            <th scope="col">Notes</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -42,9 +43,16 @@
                             @foreach ($appointments as $appointment)
                             <tr class="">
                                     <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{$appointment->client->name}}</td>
-                                    <td>{{ $appointment->date->format('d-m-Y') }}</td>
-                                    <td>{{ $appointment->time->format('H:i A')}}</td>
+                                    <td class="text-center">{{$appointment->client->name}}</td>
+                                    <td class="text-center">{{ $appointment->date}}</td>
+                                    <td class="text-center">{{ $appointment->time}}</td>
+                                    <td>
+                                        @if ($appointment->note == '')
+                                        <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-eye-slash text-gray mr-2" title="No note"></i> </a>
+                                        @else
+                                        <a href="#" wire:click.prevent = "showClientNote({{$appointment}})"> <i class="nav-icon fa fa-eye text-info mr-2" title="See note"></i> </a>
+                                        @endif
+                                    </td>
                                     <td>
                                         @if ($appointment->status == 'SCHEDULED')
                                             <span class="badge badge-primary">SCHEDULED</span>
@@ -53,8 +61,8 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
-                                        <a href="#" wire:click.prevent = ""> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
+                                        <a href="{{ route('admin.appointments.edit', $appointment) }}"> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
+                                        <a href="" wire:click.prevent = "deleteConfirmation({{ $appointment->id}})"> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
                                     </td>
                             </tr>
                             @endforeach
@@ -73,4 +81,40 @@
         <!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+
+
+
+    <div class="modal fade" id="showNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self>
+        <div class="modal-dialog">
+            <form>          
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title text-info fw-bold" id="exampleModalLabel">Client Note:</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-body">
+                                {!! $note !!}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal"> <i class="fa fa-times mr-1"></i> Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
 </div>
+
+<x-delete-confirmation></x-delete-confirmation>
+
+@push('js')
+    <script>
+        window.addEventListener('showNoteForm', event =>{
+            $('#showNote').modal('show');
+        });
+    </script>
+@endpush
