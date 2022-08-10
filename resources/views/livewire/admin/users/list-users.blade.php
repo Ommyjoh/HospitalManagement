@@ -23,8 +23,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-            <div class="d-flex justify-content-end mb-2">
-                <button wire:click.prevent="addNewUserForm" class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New User</button>
+            <div class="d-flex justify-content-between mb-1">
+                <div>
+                  <button wire:click.prevent="addNewUserForm" class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New User</button>
+                </div>
+
+                <div>
+                  <input wire:model='searchTerm' class="form-control" type="text" placeholder="Seach user">
+                </div>
             </div>
           <div class="card">
             <div class="card-body">
@@ -137,11 +143,11 @@
     <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title text-danger fw-bold" id="exampleModalLabel">Delete User 🚮</h5>
+                <h5 class="modal-title text-dark fw-bold" id="exampleModalLabel">Delete User </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <h5 class="text-danger">Are You Sure You Want To Delete This User? </h5>
+                    <h5 class="text-dark">Are You Sure You Want To Delete This User? </h5>
                 </div>
                 <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-bs-dismiss="modal"> <i class="fa fa-times mr-1"></i> Cancel</button>

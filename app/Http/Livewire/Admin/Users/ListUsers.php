@@ -17,6 +17,7 @@ class ListUsers extends Component
 
     public $user;
     public $showEditModal = false;
+    public $searchTerm;
 
     public function addUser(){
         $validatedData = Validator::make($this->state, [
@@ -28,7 +29,7 @@ class ListUsers extends Component
         $validatedData['password'] = bcrypt($validatedData['password']);
 
         User::create($validatedData);
-        $this->dispatchBrowserEvent('hideForm', ['message' => 'User added successfull😃']);
+        $this->dispatchBrowserEvent('hideForm', ['message' => 'User added successfull']);
         // session()->flash('message', 'User added successfully!');
     }
 
@@ -53,7 +54,7 @@ class ListUsers extends Component
         ])->validate();
 
         $this->user->update($validatedData);
-        $this->dispatchBrowserEvent('hideForm', ['message' => 'User updated successfull😃']);
+        $this->dispatchBrowserEvent('hideForm', ['message' => 'User updated successfull']);
     }
 
     public function showConfirmation($userId){ 
@@ -63,12 +64,15 @@ class ListUsers extends Component
 
     public function deleteUser(){
         User::destroy($this->deletedUser);
-        $this->dispatchBrowserEvent('hide-delete-confirmation', ['message' => 'User deleted successfull😢']);
+        $this->dispatchBrowserEvent('hide-delete-confirmation', ['message' => 'User deleted successfull']);
     }
 
     public function render()
     {
-        $users = User::latest()->paginate(15);
+        $users = User::query()
+        ->where('name', 'like', '%'.$this->searchTerm.'%')
+        ->orWhere('email', 'like', '%'.$this->searchTerm.'%')
+        ->latest()->paginate(15);
         return view('livewire.admin.users.list-users', [
             'users' => $users
         ]);

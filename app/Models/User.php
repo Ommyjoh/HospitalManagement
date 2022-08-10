@@ -42,4 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'created_at' => 'datetime',
     ];
+
+    public function getNameAttribute($value){
+        return ucfirst($value);
+    }
 }
