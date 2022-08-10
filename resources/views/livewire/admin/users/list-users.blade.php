@@ -28,9 +28,8 @@
                   <button wire:click.prevent="addNewUserForm" class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New User</button>
                 </div>
 
-                <div>
-                  <input wire:model='searchTerm' class="form-control" type="text" placeholder="Seach user">
-                </div>
+                <x-search-input wire:model='searchTerm'></x-search-input>
+
             </div>
           <div class="card">
             <div class="card-body">
@@ -44,8 +43,8 @@
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($users as $user)
+                    <tbody wire:loading.class="text-muted">
+                      @forelse ($users as $user)
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $user->name }}</td>
@@ -57,7 +56,14 @@
                         </td>
                       </tr>
 
-                      @endforeach
+                      @empty
+                          <tr>
+                            <td colspan="5">
+                              <img src="{{ asset('backend/dist/img/credit/notfound.png')}}" alt="" width="200">
+                              <p class="fw-bold mt-2">No User Found!</p>
+                            </td>
+                          </tr>
+                      @endforelse
                     </tbody>
                   </table>
             </div>

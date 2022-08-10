@@ -81,7 +81,7 @@
                                     <div class="row col-lg-12 mt-2">
                                         <div wire:ignore class="form-group">
                                             <label for="Name">Note:</label>
-                                            <textarea id="note" data-note="@this" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                            <textarea  id="note" data-note="@this" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                                         </div>
                                     </div>
 
