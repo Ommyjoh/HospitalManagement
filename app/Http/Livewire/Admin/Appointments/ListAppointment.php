@@ -14,6 +14,8 @@ class ListAppointment extends Component
     protected $listeners = ['deleted' => 'deleteAppointmentNow'];
     public $note;
     public $appointmentToDelete;
+    public $status;
+    protected $queryString = ['status'];
 
     public function showClientNote(Appointment $appointment){
         
@@ -37,11 +39,24 @@ class ListAppointment extends Component
         $appointment->delete();
         $this->dispatchBrowserEvent('appointmentDeleted', ['message' => 'Appointment Deleted Successfully!']);
     }
+
+    public function statusFilter($status = null){
+        $this->resetPage();
+        $this->status = $status;
+    }
     
     public function render()
     {
         return view('livewire.admin.appointments.list-appointment', [
-            'appointments' => Appointment::latest()->paginate(15)
+            'appointments' => Appointment::with('client')
+            ->when($this->status, function($query, $status){
+                return $query->where('status', $status);
+            })
+            ->latest()
+            ->paginate(15),
+            'allAppointments' => Appointment::count(),
+            'scheduledAppointments' => Appointment::where('status', 'scheduled')->count(),
+            'closedAppointments' => Appointment::where('status', 'closed')->count(),
         ]);
     }
 }

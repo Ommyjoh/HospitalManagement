@@ -1,4 +1,5 @@
 <div>
+    <x-loading-indicator></x-loading-indicator>
 <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -22,8 +23,20 @@
         <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="d-flex justify-content-end mb-2">
+                <div class="d-flex justify-content-between mb-2">
                     <a href="{{ route('admin.appointments.create') }}"><button class="btn btn-primary"><i class="nav-icon fa fa-plus-circle  mr-2" title="edit"></i> Add New Appointment</button></a>
+
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">
+                        <button wire:click = "statusFilter" type="button" class="btn btn-outline-dark {{ is_null($status) ? 'active' : ''}}">All 
+                            <span class="badge rounded-pill bg-info">{{ $allAppointments }}</span>
+                        </button>
+                        <button wire:click = "statusFilter('scheduled')" type="button" class="btn btn-outline-dark {{ ($status == 'scheduled') ? 'active' : '' }}">Scheduled
+                            <span class="badge rounded-pill bg-primary">{{ $scheduledAppointments }}</span>
+                        </button>
+                        <button wire:click = "statusFilter('closed')" type="button" class="btn btn-outline-dark {{ ($status == 'closed') ? 'active' : '' }}">Closed 
+                            <span class="badge rounded-pill bg-success">{{ $closedAppointments }}</span>
+                        </button>
+                    </div>
                 </div>
             <div class="card">
                 <div class="card-body">

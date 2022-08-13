@@ -1,4 +1,5 @@
 <div>
+  <x-loading-indicator></x-loading-indicator>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -47,7 +48,14 @@
                       @forelse ($users as $user)
                       <tr>
                         <th scope="row">{{ $loop->iteration }}</th>
-                        <td>{{ $user->name }}</td>
+                        <td class="text-start">
+                          @if ($user->avatar)
+                            <img src="{{ url('storage/avatars/'.$user->avatar) }}" alt="" width="50px" height="50px" style="object-fit: cover" class="img img-circle mr-2">
+                          @else
+                            <img src="{{ url('storage/avatars/profPic.jpg') }}" alt="" width="50px" class="img img-circle mr-2">
+                          @endif
+                          {{ $user->name }}
+                        </td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->created_at->format('d-m-Y')}}</td>
                         <td>
@@ -113,6 +121,7 @@
                             </div>
                         @enderror
                         </div>
+
                         @if ($showEditModal == FALSE)
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
@@ -121,12 +130,63 @@
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
-                            @enderror
+                               @enderror
                             </div>
                             <div class="mb-3">
-                                <label for="PasswordConfirmation" class="form-label">Password</label>
+                                <label for="PasswordConfirmation" class="form-label">Confirm Password</label>
                                 <input type="password" wire:model.defer='state.password_confirmation' class="form-control text-info" id="PasswordConfirmation" placeholder="Confirm Password">
                             </div>                            
+                        @endif
+
+                        @if ($showEditModal == FALSE)
+                          <div class="form-group">
+                            <label for="">Profile Picture</label>
+                            <div class="custom-file">
+                            <input wire:model.defer = "photo" type="file" class="custom-file-input @error('photo') is-invalid @enderror" id="customFile">
+                            <label class="custom-file-label" for="customFile">
+                              @if ($photo)
+                                  {{ $photo->getClientOriginalName() }}
+                              @else
+                                  Choose Image
+                              @endif
+                            </label>
+                            </div>
+                              @error('photo')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                              @enderror
+
+                            
+                          </div>
+                        @else
+                          <div class="form-group">
+                            <div class="mb-2">
+                              <label for="">Profile Picture</label>
+                              <br>
+                              @if ($state['avatar'] == NULL)
+                                <img src="{{ url('storage/avatars/profPic.jpg') }}" alt="" width="50px" class="img img-circle">
+                                <span>No image!</span>
+                              @else
+                              <img src="{{ url('storage/avatars/'.$state['avatar']) }}" alt="" width="50px" height="50px" style="object-fit: cover" class="img img-circle">
+                              <span>{{ $state['name'] }}</span>
+                              @endif
+                            </div>
+                            <div class="custom-file">
+                            <input wire:model.defer = "photo" type="file" class="custom-file-input @error('photo') is-invalid @enderror" id="customFile">
+                            <label class="custom-file-label" for="customFile">
+                              @if ($photo)
+                              {{ $photo->getClientOriginalName() }}
+                              @else
+                                  Choose Image to Update
+                              @endif</label>
+                                </div>
+                              @error('photo')
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
+                              @enderror
+                          </div>
                         @endif
                 </div>
                 <div class="modal-footer">

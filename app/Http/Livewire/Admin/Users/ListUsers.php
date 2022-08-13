@@ -5,10 +5,12 @@ namespace App\Http\Livewire\Admin\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 
 class ListUsers extends Component
 {
+    use WithFileUploads;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
@@ -18,15 +20,24 @@ class ListUsers extends Component
     public $user;
     public $showEditModal = false;
     public $searchTerm;
+    public $photo;
 
     public function addUser(){
         $validatedData = Validator::make($this->state, [
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
+            'photo' => 'image|max:1024',
         ])->validate();
 
         $validatedData['password'] = bcrypt($validatedData['password']);
+
+        if($this->photo){
+            $this->validate([
+                'photo' => 'image|max:1024',
+            ]);
+            $validatedData['avatar'] = $this->photo->store('/', 'avatars');
+        }
 
         User::create($validatedData);
         $this->dispatchBrowserEvent('hideForm', ['message' => 'User added successfull']);
@@ -35,13 +46,12 @@ class ListUsers extends Component
 
     public function addNewUserForm(){
         $this->showEditModal = false;
-        $this->state = [];
+        $this->reset();
         $this->dispatchBrowserEvent('showForm');
     }
 
     public function editUserForm(User $user){
         $this->showEditModal = true;
-
         $this->user = $user;
         $this->state = $user->toArray();
         $this->dispatchBrowserEvent('showForm');
@@ -53,7 +63,19 @@ class ListUsers extends Component
             'email' => 'required|email|unique:users,email,'.$this->user->id,
         ])->validate();
 
+        if($this->photo){
+            $this->validate([
+                'photo' => 'image|max:1024',
+            ],
+            [
+            'photo.image' => 'Heeeey'
+            ]
+        );
+            $validatedData['avatar'] = $this->photo->store('/', 'avatars');
+        }
+
         $this->user->update($validatedData);
+        $this->photo = '';
         $this->dispatchBrowserEvent('hideForm', ['message' => 'User updated successfull']);
     }
 
