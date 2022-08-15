@@ -1,5 +1,4 @@
 <div>
-  <x-loading-indicator></x-loading-indicator>
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container-fluid">
@@ -60,7 +59,7 @@
                         <td>{{$user->created_at->format('d-m-Y')}}</td>
                         <td>
                             <a href="#" wire:click.prevent = "editUserForm({{ $user }})"> <i class="nav-icon fa fa-edit text-info mr-2" title="edit"></i> </a>
-                            <a href="#" wire:click.prevent = "showConfirmation({{ $user->id }})"> <i class="nav-icon fa fa-trash text-danger" title="delete"></i> </a>
+                            <a href="#" wire:click.prevent = "showConfirmation({{ $user->id }})"> <i class="nav-icon fa fa-trash text-danger" title="delete"></i></a>
                         </td>
                       </tr>
 

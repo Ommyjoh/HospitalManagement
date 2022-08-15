@@ -19,16 +19,17 @@ use App\Http\Livewire\Admin\Users\ListUsers;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('admin/dashboard', DashboardController::class)->name('admin.dashboard');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('admin/dashboard', DashboardController::class)->name('admin.dashboard');
 
+    Route::get('/admin/users', ListUsers::class)->name('admin.listUsers');
 
-Route::get('/admin/users', ListUsers::class)->name('admin.listUsers');
+    Route::get('admin/appointments', ListAppointment::class)->name('admin.appointments');
 
-Route::get('admin/appointments', ListAppointment::class)->name('admin.appointments');
+    Route::get('admin/appointments/create', CreateAppointment::class)->name('admin.appointments.create');
 
-Route::get('admin/appointments/create', CreateAppointment::class)->name('admin.appointments.create');
-
-Route::get('admin/appointments/{appointment}/edit', UpdateAppointment::class)->name('admin.appointments.edit');
+    Route::get('admin/appointments/{appointment}/edit', UpdateAppointment::class)->name('admin.appointments.edit');
+});
