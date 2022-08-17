@@ -5,7 +5,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Panel</h1>
+              <h1 class="m-0">Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -22,64 +22,93 @@
       <div class="content">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-  
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's
-                    content.
-                  </p>
-  
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
+           
+            <livewire:admin.dashboard.appointment-count/>
+            
+            <div class="col-lg-3 col-6">
+            
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53</h3>
+                  <p>All Users</p>
                 </div>
-              </div>
-  
-              <div class="card card-primary card-outline">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-  
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's
-                    content.
-                  </p>
-                  <a href="#" class="card-link">Card link</a>
-                  <a href="#" class="card-link">Another link</a>
-                </div>
-              </div><!-- /.card -->
-            </div>
-            <!-- /.col-md-6 -->
-            <div class="col-lg-6">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="m-0">Featured</h5>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Special title treatment</h6>
-  
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-              </div>
-  
-              <div class="card card-primary card-outline">
-                <div class="card-header">
-                  <h5 class="m-0">Featured</h5>
-                </div>
-                <div class="card-body">
-                  <h6 class="card-title">Special title treatment</h6>
-  
-                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
+                <a href="{{ route('admin.listUsers')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-            <!-- /.col-md-6 -->
-          </div>
-          <!-- /.row -->
-        </div><!-- /.container-fluid -->
+            
+            <div class="col-lg-3 col-6">
+            
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>44</h3>
+                  <p>Recently Activity</p>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            
+            <div class="col-lg-3 col-6">
+            
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>65</h3>
+                  <p>Trash</p>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+            </div>
+            
+            </div>
+
+            <div class="mt-4">
+              <h2>Summaries</h2>
+            </div>
+
+            <div class="d-flex">
+
+              <div class="info-box mb-3 bg-info mr-2">
+                <span class="info-box-icon"><i class="far fa-comment"></i></span>
+                <div class="info-box-content">
+                <span class="info-box-text">Direct Messages</span>
+                <span class="info-box-number">163,921</span>
+                </div>
+                
+                </div>
+
+                <div class="info-box mb-3 bg-success">
+                  <span class="info-box-icon"><i class="far fa-heart"></i></span>
+                  <div class="info-box-content">
+                  <span class="info-box-text">Mentions</span>
+                  <span class="info-box-number">92,050</span>
+                  </div>
+                  
+                  </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="info-box mb-3 mr-2 bg-warning">
+                <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+                <div class="info-box-content">
+                <span class="info-box-text">Inventory</span>
+                <span class="info-box-number">5,200</span>
+                </div>
+                
+              </div>
+
+              <div class="info-box mb-3 bg-danger">
+                <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+                <div class="info-box-content">
+                <span class="info-box-text">Downloads</span>
+                <span class="info-box-number">114,381</span>
+                </div>
+                
+              </div>
+
+            </div>
+
+
+        </div>
+        <!-- /.container-fluid -->
       </div>
       <!-- /.content -->
     </div>

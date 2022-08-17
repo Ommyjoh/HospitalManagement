@@ -23,6 +23,11 @@
 </div>
 <div class="card-body">
 <p class="login-box-msg">Sign in to start your session</p>
+   <div class="mb-2">
+        @error('email')
+        <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
     <form class="mb-5" action="{{ route('login') }}" method="POST">
         @csrf
         <div class="input-group mb-3">
@@ -32,10 +37,6 @@
                 <span class="fas fa-envelope"></span>
                 </div>
             </div>
-
-            @error('email')
-            <span class="text-danger">{{ $message }}</span>
-            @enderror
 
         </div>
         <div class="input-group mb-3">
