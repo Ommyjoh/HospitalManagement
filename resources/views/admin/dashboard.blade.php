@@ -24,26 +24,18 @@
           <div class="row">
            
             <livewire:admin.dashboard.appointment-count/>
-            
-            <div class="col-lg-3 col-6">
-            
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53</h3>
-                  <p>All Users</p>
-                </div>
-                <a href="{{ route('admin.listUsers')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
+
+            <livewire:admin.dashboard.users-count/>
+
             
             <div class="col-lg-3 col-6">
             
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>44</h3>
-                  <p>Recently Activity</p>
+                  <p>Activities</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">All activities <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             
@@ -54,7 +46,7 @@
                   <h3>65</h3>
                   <p>Trash</p>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="#" class="small-box-footer">All trashies<i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             
